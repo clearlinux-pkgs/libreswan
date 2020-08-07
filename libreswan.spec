@@ -4,7 +4,7 @@
 #
 Name     : libreswan
 Version  : 3.32
-Release  : 18
+Release  : 19
 URL      : https://github.com/libreswan/libreswan/archive/v3.32/libreswan-3.32.tar.gz
 Source0  : https://github.com/libreswan/libreswan/archive/v3.32/libreswan-3.32.tar.gz
 Summary  : Libreswan IPSEC implementation
@@ -117,7 +117,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1596500176
+export SOURCE_DATE_EPOCH=1596825340
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -126,11 +126,14 @@ export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+## make_prepend content
+CFLAGS="$CFLAGS -DNSS_PKCS11_2_0_COMPAT=1"
+## make_prepend end
 make  %{?_smp_mflags}  programs
 
 
 %install
-export SOURCE_DATE_EPOCH=1596500176
+export SOURCE_DATE_EPOCH=1596825340
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libreswan
 cp %{_builddir}/libreswan-3.32/COPYING %{buildroot}/usr/share/package-licenses/libreswan/4cc77b90af91e615a64ae04893fdffa7939db84c
