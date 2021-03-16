@@ -1,9 +1,9 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-flex
 Linux-PAM-dev
+docbook-xml
+flex
 libcap-ng-dev
-xmlto
 libxml2-dev
 libxslt-bin
-docbook-xml
+xmlto

@@ -5,37 +5,28 @@ Subject: [PATCH] Set default options since passing them later doesn't work.
 
 Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
 ---
- mk/config.mk | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ mk/config.mk | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/mk/config.mk b/mk/config.mk
-index 5d01606..7b1a825 100644
+index 4c53451..d26a8a7 100644
 --- a/mk/config.mk
 +++ b/mk/config.mk
-@@ -83,7 +83,7 @@ include ${LIBRESWANSRCDIR}/mk/defaults/${BUILDENV}.mk
- DESTDIR?=
+@@ -124,7 +124,7 @@ USERLAND_INCLUDES += -I$(srcdir) -I$(builddir) -I$(top_srcdir)/include
+ DESTDIR ?=
  
- # "local" part of tree, used in building other pathnames
--INC_USRLOCAL?=/usr/local
-+INC_USRLOCAL?=/usr
+ # "PREFIX" part of tree, used in building other pathnames.
+-PREFIX ?= /usr/local
++PREFIX ?= /usr
  
- # PUBDIR is where the "ipsec" command goes; beware, many things define PATH
- # settings which are assumed to include PUBDIR (or at least, to include *some*
-@@ -107,7 +107,7 @@ SBINDIR?=$(DESTDIR)$(FINALSBINDIR)
- 
- # where the appropriate manpage tree is located
- # location within INC_USRLOCAL
--INC_MANDIR?=man
-+INC_MANDIR?=share/man
- FINALMANDIR=$(INC_USRLOCAL)/$(INC_MANDIR)
- # the full pathname
- MANTREE?=$(DESTDIR)$(FINALMANDIR)
-@@ -341,7 +341,7 @@ POD2MAN?=$(shell which pod2man | grep / | head -n1)
- #       you may or maynot have
+ # Compatibility with old INC_USRLOCAL which was changed to PREFIX.
+ # We will overwrite PREFIX with INC_USRLOCAL until libreswan 4.2
+@@ -373,7 +373,7 @@ USERLAND_CFLAGS += -DUSE_IKEv1
+ endif
  
  # Enable support for DNSSEC. This requires the unbound and ldns libraries.
--USE_DNSSEC?=true
-+USE_DNSSEC?=false
+-USE_DNSSEC ?= true
++USE_DNSSEC ?= false
  
  # For systemd start/stop notifications and watchdog feature
  # We only enable this by default if used INITSYSTEM is systemd
