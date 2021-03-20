@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Patrick McCarty <patrick.mccarty@intel.com>
+Date: Sat, 20 Mar 2021 00:36:44 +0000
+Subject: [PATCH] Create missing /var/lib/ipsec/nss directory
+
+Fixes https://github.com/clearlinux/distribution/issues/2311
+
+Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
+---
+ initsystems/systemd/libreswan.conf.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/initsystems/systemd/libreswan.conf.in b/initsystems/systemd/libreswan.conf.in
+index c9888d6..8940585 100644
+--- a/initsystems/systemd/libreswan.conf.in
++++ b/initsystems/systemd/libreswan.conf.in
+@@ -1 +1,2 @@
+ d @IPSEC_RUNDIR@ 755 root root -
++d @IPSEC_NSSDIR@ 700 root root -

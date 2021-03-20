@@ -4,7 +4,7 @@
 #
 Name     : libreswan
 Version  : 4.3
-Release  : 20
+Release  : 21
 URL      : https://github.com/libreswan/libreswan/archive/v4.3/libreswan-4.3.tar.gz
 Source0  : https://github.com/libreswan/libreswan/archive/v4.3/libreswan-4.3.tar.gz
 Summary  : Libreswan IPSEC implementation
@@ -30,6 +30,7 @@ BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(nss)
 BuildRequires : xmlto
 Patch1: 0001-Set-default-options-since-passing-them-later-doesn-t.patch
+Patch2: 0002-Create-missing-var-lib-ipsec-nss-directory.patch
 
 %description
 Libreswan is a free implementation of IPSEC & IKE for Linux.  IPSEC is
@@ -112,13 +113,14 @@ services components for the libreswan package.
 %setup -q -n libreswan-4.3
 cd %{_builddir}/libreswan-4.3
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1615938139
+export SOURCE_DATE_EPOCH=1616200880
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -134,7 +136,7 @@ make  %{?_smp_mflags}  programs
 
 
 %install
-export SOURCE_DATE_EPOCH=1615938139
+export SOURCE_DATE_EPOCH=1616200880
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libreswan
 cp %{_builddir}/libreswan-4.3/COPYING %{buildroot}/usr/share/package-licenses/libreswan/4cc77b90af91e615a64ae04893fdffa7939db84c
