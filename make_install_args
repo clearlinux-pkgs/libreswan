@@ -1,1 +1,1 @@
-PREFIX=/usr DESTDIR=%{buildroot}
+PREFIX=/usr DESTDIR=%{buildroot} INITSYSTEM=systemd

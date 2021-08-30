@@ -4,12 +4,12 @@
 #
 Name     : libreswan
 Version  : 4.4
-Release  : 22
+Release  : 23
 URL      : https://github.com/libreswan/libreswan/archive/v4.4/libreswan-4.4.tar.gz
 Source0  : https://github.com/libreswan/libreswan/archive/v4.4/libreswan-4.4.tar.gz
 Summary  : Libreswan IPSEC implementation
 Group    : Development/Tools
-License  : BSD-3-Clause BSD-4-Clause GPL-2.0 LGPL-2.0 MPL-2.0 OpenSSL
+License  : BSD-3-Clause BSD-4-Clause GPL-2.0 LGPL-2.0 MIT MPL-2.0 OpenSSL
 Requires: libreswan-bin = %{version}-%{release}
 Requires: libreswan-config = %{version}-%{release}
 Requires: libreswan-libexec = %{version}-%{release}
@@ -120,30 +120,31 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1620758662
+export SOURCE_DATE_EPOCH=1630299336
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 ## make_prepend content
 CFLAGS="$CFLAGS -DNSS_PKCS11_2_0_COMPAT=1"
 ## make_prepend end
-make  %{?_smp_mflags}  programs
+make  %{?_smp_mflags}  programs INITSYSTEM=systemd
 
 
 %install
-export SOURCE_DATE_EPOCH=1620758662
+export SOURCE_DATE_EPOCH=1630299336
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libreswan
 cp %{_builddir}/libreswan-4.4/COPYING %{buildroot}/usr/share/package-licenses/libreswan/4cc77b90af91e615a64ae04893fdffa7939db84c
 cp %{_builddir}/libreswan-4.4/LICENSE %{buildroot}/usr/share/package-licenses/libreswan/1877c44246850c068da2ffbba94330c9463f6552
 cp %{_builddir}/libreswan-4.4/lib/COPYING.LIB %{buildroot}/usr/share/package-licenses/libreswan/ba8966e2473a9969bdcab3dc82274c817cfd98a1
+cp %{_builddir}/libreswan-4.4/testing/linux-system-roles.vpn/LICENSE %{buildroot}/usr/share/package-licenses/libreswan/b4d3d28da251063ecef9aa630bbbdc9f9687677c
 cp %{_builddir}/libreswan-4.4/testing/programs/getpeercon_server/LICENSE %{buildroot}/usr/share/package-licenses/libreswan/4cc77b90af91e615a64ae04893fdffa7939db84c
-%make_install PREFIX=/usr DESTDIR=%{buildroot}
+%make_install PREFIX=/usr DESTDIR=%{buildroot} INITSYSTEM=systemd
 
 %files
 %defattr(-,root,root,-)
@@ -198,6 +199,7 @@ cp %{_builddir}/libreswan-4.4/testing/programs/getpeercon_server/LICENSE %{build
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/libreswan/1877c44246850c068da2ffbba94330c9463f6552
 /usr/share/package-licenses/libreswan/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/libreswan/b4d3d28da251063ecef9aa630bbbdc9f9687677c
 /usr/share/package-licenses/libreswan/ba8966e2473a9969bdcab3dc82274c817cfd98a1
 
 %files man
