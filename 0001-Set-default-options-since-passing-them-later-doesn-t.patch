@@ -9,19 +9,19 @@ Signed-off-by: Patrick McCarty <patrick.mccarty@intel.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/mk/config.mk b/mk/config.mk
-index 4c53451..d26a8a7 100644
+index 455cd4d..fec6f3b 100644
 --- a/mk/config.mk
 +++ b/mk/config.mk
-@@ -124,7 +124,7 @@ USERLAND_INCLUDES += -I$(srcdir) -I$(builddir) -I$(top_srcdir)/include
+@@ -175,7 +175,7 @@ USERLAND_INCLUDES += -I$(srcdir) -I$(builddir) -I$(top_srcdir)/include
  DESTDIR ?=
  
  # "PREFIX" part of tree, used in building other pathnames.
 -PREFIX ?= /usr/local
 +PREFIX ?= /usr
  
- # Compatibility with old INC_USRLOCAL which was changed to PREFIX.
- # We will overwrite PREFIX with INC_USRLOCAL until libreswan 4.2
-@@ -373,7 +373,7 @@ USERLAND_CFLAGS += -DUSE_IKEv1
+ # LIBEXECDIR is where sub-commands get put, FINALLIBEXECDIR is where
+ # the "ipsec" command will look for them when it is run.
+@@ -380,7 +380,7 @@ USERLAND_CFLAGS += -DUSE_IKEv1
  endif
  
  # Enable support for DNSSEC. This requires the unbound and ldns libraries.
