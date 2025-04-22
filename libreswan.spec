@@ -4,7 +4,7 @@
 #
 Name     : libreswan
 Version  : 4.6
-Release  : 25
+Release  : 26
 URL      : https://github.com/libreswan/libreswan/archive/v4.6/libreswan-4.6.tar.gz
 Source0  : https://github.com/libreswan/libreswan/archive/v4.6/libreswan-4.6.tar.gz
 Summary  : IPsec implementation with IKEv1 and IKEv2 keying protocols
